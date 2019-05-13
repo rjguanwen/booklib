@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.rjguanwen.booklib.mapper.BookMapper">
+
+    <resultMap id="BaseResultMap" type="cn.rjguanwen.booklib.entity.Book">
+        <result column="id" jdbcType="INTEGER" property="id" />
+        <result column="book_name" jdbcType="VARCHAR" property="bookName" />
+        <result column="publisher" jdbcType="VARCHAR" property="publisher" />
+        <result column="can_borrow" jdbcType="VARCHAR" property="canBorrow" />
+        <result column="suitable_ages" jdbcType="VARCHAR" property="suitableAges" />
+        <result column="has_pinyin" jdbcType="VARCHAR" property="hasPinyin" />
+        <result column="is_english" jdbcType="VARCHAR" property="isEnglish" />
+        <result column="store_area" jdbcType="VARCHAR" property="storeArea" />
+        <result column="book_tags" jdbcType="VARCHAR" property="bookTags" />
+        <result column="user_id" jdbcType="INTEGER" property="userId" />
+        <result column="note" jdbcType="VARCHAR" property="note" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, book_name, publisher, can_borrow, suitable_ages, has_pinyin, is_english, store_area, book_tags, user_id, note
+    </sql>
+
+    <select id="getBookDetail" resultMap="BaseResultMap">
+        select * from books_in_one where id = #{id}
+    </select>
+
+    <select id="getAllBooks" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM books_in_one
+    </select>
+
+    <select id="getBook" parameterType="java.lang.Integer" resultMap="BaseResultMap" >
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM books_in_one
+        WHERE id = #{id}
+    </select>
+
+    <insert id="insertBook" parameterType="cn.rjguanwen.booklib.entity.Book" >
+       INSERT INTO
+            books_in_one (book_name, publisher, can_borrow, suitable_ages, has_pinyin, is_english, store_area, book_tags, user_id, note)
+        VALUES
+            (#{bookName}, #{publisher}, #{canBorrow}, #{suitableAges}, #{hasPinyin}, #{isEnglish}, #{storeArea}, #{bookTags}, #{userId}, #{note})
+    </insert>
+
+    <update id="updateBook" parameterType="cn.rjguanwen.booklib.entity.Book" >
+        UPDATE
+        books_in_one
+        SET
+        <if test="bookName != null">book_name = #{bookName},</if>
+        <if test="publisher != null">publisher = #{publisher},</if>
+        <if test="canBorrow != null">can_borrow = #{canBorrow},</if>
+        <if test="suitableAges != null">suitable_ages = #{suitableAges},</if>
+        <if test="hasPinyin != null">has_pinyin = #{hasPinyin},</if>
+        <if test="isEnglish != null">is_english = #{isEnglish},</if>
+        <if test="storeArea != null">store_area = #{storeArea},</if>
+        <if test="bookTags != null">book_tags = #{bookTags},</if>
+        <if test="userId != null">user_id = #{userId},</if>
+        <if test="note != null">note = #{note},</if>
+        WHERE
+        id = #{id}
+    </update>
+
+    <delete id="deleteBook" parameterType="java.lang.Integer" >
+       DELETE FROM
+             books_in_one
+       WHERE
+             id =#{id}
+    </delete>
+</mapper>
