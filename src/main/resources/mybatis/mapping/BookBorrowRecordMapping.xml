@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.rjguanwen.booklib.mapper.BookBorrowRecordMapper">
+    <resultMap id="BaseResultMap" type="cn.rjguanwen.booklib.entity.BookBorrowRecord">
+        <result column="id" jdbcType="INTEGER" property="id" />
+        <result column="book_id" jdbcType="INTEGER" property="bookId" />
+        <result column="book_name" jdbcType="VARCHAR" property="bookName" />
+        <result column="borrow_user_id" jdbcType="INTEGER" property="borrowUserId" />
+        <result column="start_date" jdbcType="TIMESTAMP" property="startDate" />
+        <result column="end_date" jdbcType="TIMESTAMP" property="endDate" />
+        <result column="note" jdbcType="VARCHAR" property="note" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+      id, book_id, book_name, borrow_user_id, start_date, end_date, note
+    </sql>
+
+    <select id="getAllBookBR" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM book_borrow_record
+    </select>
+
+    <select id="getBookBR" parameterType="java.lang.Integer" resultMap="BaseResultMap" >
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM book_borrow_record
+        WHERE id = #{id}
+    </select>
+
+    <insert id="insertBookBR" parameterType="cn.rjguanwen.booklib.entity.BookBorrowRecord">
+        insert into book_borrow_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="bookId != null">
+                book_id,
+            </if>
+            <if test="bookName != null">
+                book_name,
+            </if>
+            <if test="borrowUserId != null">
+                borrow_user_id,
+            </if>
+            <if test="startDate != null">
+                start_date,
+            </if>
+            <if test="note != null">
+                note,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="bookId != null">
+                #{bookId,jdbcType=INTEGER},
+            </if>
+            <if test="bookName != null">
+                #{bookName,jdbcType=VARCHAR},
+            </if>
+            <if test="borrowUserId != null">
+                #{borrowUserId,jdbcType=INTEGER},
+            </if>
+            <if test="startDate != null">
+                #{startDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="note != null">
+                #{note,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateBookBR" parameterType="map">
+        UPDATE book_borrow_record
+        SET end_date = #{record.endDate,jdbcType=TIMESTAMP},
+        WHERE
+             id =#{id}
+    </update>
+</mapper>
