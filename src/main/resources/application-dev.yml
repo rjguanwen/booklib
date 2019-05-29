@@ -17,10 +17,22 @@ spring:
 #    url: jdbc:mysql://localhost:3306/book_lib?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
     username: ENC(ykYC+9HTgKhPeLq42jO7mw==)
     password: ENC(uWQFqJ4DD4niAYctp8368w==)
-    url: ENC(WxNL4+an5PhUgExz+F6ecgjuw9Q0SbR9m9MZ1XHhgiY/kZ825otmerUsJLTffxSu6szlqBaIa5wDo0e9NfMWOiW3As0KdhUOGLPU4uoh+a846D3zBGH9XnFgQEZPBFWF4PGUCseLEq84O472OVbiL0iZqxP7NeV8)
+#    url: ENC(WxNL4+an5PhUgExz+F6ecgjuw9Q0SbR9m9MZ1XHhgiY/kZ825otmerUsJLTffxSu6szlqBaIa5wDo0e9NfMWOiW3As0KdhUOGLPU4uoh+a846D3zBGH9XnFgQEZPBFWF4PGUCseLEq84O472OVbiL0iZqxP7NeV8)
+    url: jdbc:mysql://172.24.170.241:3306/book_lib?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
     driver-class-name: com.mysql.cj.jdbc.Driver
     # 使用 druid 数据源
     type: com.alibaba.druid.pool.DruidDataSource
+
+#  data:
+#    elasticsearch:
+#      cluster-name: booklib_elasticsearch
+#      cluster-nodes: 127.0.0.1:9300
+#      repositories:
+#        enabled: true
+#      properties:
+#        path:
+#          logs: ./elasticsearch/log #elasticsearch日志存储目录
+#          data: ./elasticsearch/data #elasticsearch数据存储目录
 
 #jasypt加密的密匙
 jasypt:
