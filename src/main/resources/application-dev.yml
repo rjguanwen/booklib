@@ -41,7 +41,7 @@ jasypt:
 
 mybatis:
   mapper-locations: classpath:mybatis/mapping/*.xml
-  type-aliases-package: cn.rjguanwen.userdemo.entity
+  type-aliases-package: cn.rjguanwen.booklib.entity
   config-location: classpath:mybatis/mybatis-config.xml
 
 # pagehelper分页插件配置
