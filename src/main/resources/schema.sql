@@ -64,6 +64,18 @@ CREATE TABLE books_in_one (
 	CONSTRAINT BOOKS_IN_ONE_PK PRIMARY KEY (id)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
+-- 书籍借阅记录表
+CREATE TABLE book_borrow_record (
+	id INTEGER NOT NULL AUTO_INCREMENT,
+	book_id INTEGER NOT NULL,
+	book_name VARCHAR(100) NOT NULL,
+	borrow_user_id INTEGER NOT NULL,
+	start_date DATETIME default CURRENT_TIMESTAMP,
+	end_date DATETIME,
+	note varchar(512),
+	CONSTRAINT BOOK_BORROW_RECORD_PK PRIMARY KEY (id)
+)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
 -- 通过csv文件载入数据，并修正部分字段内容，没啥用，仅记录
 -- load data local infile '/tmp/book_data.csv' into table books_in_one fields terminated by ',' (book_name,publisher,can_borrow,suitable_ages,has_pinyin,is_english,store_area,book_tags,user_id,note);
 -- update books_in_one set has_pinyin ='1' where has_pinyin ='是' ;
